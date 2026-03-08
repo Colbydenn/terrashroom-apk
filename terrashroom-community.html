@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terrashroom Revival — Community Fix</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --cream:    #F5F1EB;
+  --cream2:   #EDE7DC;
+  --brown:    #3D2B1F;
+  --brown-lt: #7A5C4A;
+  --mushroom: #C8956A;
+  --teal:     #2E8B8A;
+  --teal-lt:  #5EC5C0;
+  --teal-dim: #1F6060;
+  --sage:     #6B9A52;
+  --amber:    #C87941;
+  --border:   #D8D0C4;
+  --muted:    #8A7A6A;
+  --white:    #FFFFFF;
+  --text:     #2A1F16;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--brown);
+  color: var(--cream);
+  padding: 80px 24px 64px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 50%, rgba(46,139,138,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 80% 40%, rgba(200,121,65,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-mushroom {
+  font-size: 64px;
+  line-height: 1;
+  margin-bottom: 20px;
+  display: block;
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.hero h1 {
+  font-family: 'Lora', serif;
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 14px;
+  color: var(--cream);
+}
+.hero h1 em {
+  color: var(--teal-lt);
+  font-style: normal;
+}
+.hero-sub {
+  font-size: clamp(14px, 2vw, 17px);
+  color: rgba(245,241,235,0.72);
+  max-width: 560px;
+  margin: 0 auto 32px;
+  font-weight: 300;
+  line-height: 1.7;
+}
+.hero-badges {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+.badge {
+  background: rgba(245,241,235,0.1);
+  border: 1px solid rgba(245,241,235,0.2);
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-size: 12px;
+  color: rgba(245,241,235,0.8);
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+.badge.good {
+  background: rgba(46,139,138,0.2);
+  border-color: rgba(94,197,192,0.4);
+  color: var(--teal-lt);
+}
+.cta-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.18s;
+  line-height: 1;
+}
+.btn-teal {
+  background: var(--teal);
+  color: white;
+  box-shadow: 0 4px 20px rgba(46,139,138,0.35);
+}
+.btn-teal:hover { background: var(--teal-dim); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(46,139,138,0.45); }
+.btn-outline {
+  background: transparent;
+  color: var(--cream);
+  border: 1.5px solid rgba(245,241,235,0.3);
+}
+.btn-outline:hover { background: rgba(245,241,235,0.08); border-color: rgba(245,241,235,0.5); }
+
+/* ── MAIN ── */
+main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+/* ── SECTION ── */
+section {
+  padding: 56px 0 0;
+}
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 10px;
+}
+.section-title {
+  font-family: 'Lora', serif;
+  font-size: clamp(22px, 3.5vw, 32px);
+  font-weight: 700;
+  color: var(--brown);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.section-body {
+  font-size: 15px;
+  color: var(--brown-lt);
+  line-height: 1.8;
+  max-width: 680px;
+}
+
+hr.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 48px 0 0;
+}
+
+/* ── WHY TABLE ── */
+.compare {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+  font-size: 14px;
+}
+.compare th {
+  background: var(--cream2);
+  color: var(--brown);
+  font-weight: 600;
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 2px solid var(--border);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.compare td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--brown-lt);
+  vertical-align: top;
+}
+.compare tr:last-child td { border-bottom: none; }
+.compare tr:nth-child(even) td { background: rgba(237,231,220,0.4); }
+.bad  { color: #B91C1C; font-weight: 500; }
+.good { color: #166534; font-weight: 500; }
+
+/* ── HOW IT WORKS ── */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 28px;
+  position: relative;
+}
+.steps::before {
+  content: '';
+  position: absolute;
+  left: 21px;
+  top: 42px;
+  bottom: 42px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--teal), var(--teal-lt), transparent);
+}
+.step {
+  display: flex;
+  gap: 20px;
+  padding: 0 0 32px;
+  position: relative;
+}
+.step-num {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: white;
+  font-weight: 700;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 0 4px var(--cream), 0 0 0 5px var(--teal-lt);
+}
+.step-content h3 {
+  font-family: 'Lora', serif;
+  font-size: 18px;
+  color: var(--brown);
+  margin-bottom: 6px;
+  padding-top: 10px;
+}
+.step-content p {
+  font-size: 14px;
+  color: var(--brown-lt);
+  line-height: 1.7;
+}
+
+/* ── CALLOUT ── */
+.callout {
+  background: rgba(46,139,138,0.07);
+  border-left: 4px solid var(--teal);
+  border-radius: 0 10px 10px 0;
+  padding: 16px 18px;
+  margin: 20px 0;
+  font-size: 14px;
+  color: var(--brown-lt);
+  line-height: 1.7;
+}
+.callout strong { color: var(--teal-dim); }
+.callout.warn {
+  background: rgba(200,121,65,0.07);
+  border-color: var(--amber);
+}
+.callout.warn strong { color: var(--amber); }
+
+/* ── CODE ── */
+code {
+  font-family: 'DM Mono', monospace;
+  font-size: 12.5px;
+  background: rgba(46,139,138,0.1);
+  color: var(--teal-dim);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+pre {
+  background: #1E1A16;
+  border-radius: 10px;
+  padding: 16px 18px;
+  overflow-x: auto;
+  margin: 12px 0;
+}
+pre code {
+  background: none;
+  color: #7ABF5A;
+  font-size: 12.5px;
+  padding: 0;
+  line-height: 1.8;
+}
+
+/* ── HARDWARE CARDS ── */
+.hw-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+.hw-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px 16px;
+  box-shadow: 0 2px 8px rgba(61,43,31,0.07);
+}
+.hw-card-icon { font-size: 28px; margin-bottom: 10px; }
+.hw-card-name {
+  font-family: 'Lora', serif;
+  font-size: 15px;
+  color: var(--brown);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.hw-card-cost {
+  font-size: 13px;
+  color: var(--teal);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.hw-card-note {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.hw-card.featured {
+  border-color: var(--teal-lt);
+  box-shadow: 0 0 0 2px rgba(94,197,192,0.2), 0 4px 14px rgba(61,43,31,0.1);
+}
+.hw-card .rec-tag {
+  display: inline-block;
+  background: var(--teal);
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+/* ── DOWNLOAD SECTION ── */
+.download-box {
+  background: var(--brown);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  margin-top: 48px;
+  position: relative;
+  overflow: hidden;
+}
+.download-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 30% 50%, rgba(46,139,138,0.2), transparent);
+  pointer-events: none;
+}
+.download-box h2 {
+  font-family: 'Lora', serif;
+  font-size: 26px;
+  color: var(--cream);
+  margin-bottom: 10px;
+}
+.download-box p {
+  color: rgba(245,241,235,0.65);
+  font-size: 14px;
+  margin-bottom: 28px;
+  line-height: 1.7;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.download-files {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.dl-card {
+  background: rgba(245,241,235,0.08);
+  border: 1px solid rgba(245,241,235,0.15);
+  border-radius: 12px;
+  padding: 18px 22px;
+  text-align: left;
+  min-width: 200px;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.dl-card:hover { background: rgba(245,241,235,0.14); border-color: rgba(94,197,192,0.5); }
+.dl-card-type {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--teal-lt);
+  margin-bottom: 6px;
+}
+.dl-card-name {
+  font-family: 'Lora', serif;
+  font-size: 17px;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+.dl-card-desc {
+  font-size: 12px;
+  color: rgba(245,241,235,0.5);
+  line-height: 1.5;
+}
+
+/* ── FAQ ── */
+.faq { margin-top: 28px; }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+}
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 18px 0;
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  color: var(--brown);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+}
+.faq-q:hover { color: var(--teal-dim); }
+.faq-arrow { font-size: 18px; color: var(--teal); transition: transform 0.2s; flex-shrink: 0; }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  font-size: 14px;
+  color: var(--brown-lt);
+  line-height: 1.8;
+}
+.faq-a-inner { padding-bottom: 18px; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-item.open .faq-a { max-height: 600px; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--brown);
+  color: rgba(245,241,235,0.5);
+  text-align: center;
+  padding: 32px 24px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+footer a { color: var(--teal-lt); text-decoration: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .hero { padding: 56px 20px 48px; }
+  main { padding: 0 16px 60px; }
+  .download-box { padding: 28px 20px; }
+  .steps::before { left: 19px; }
+  .compare { font-size: 13px; }
+  .compare th, .compare td { padding: 8px 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-mushroom">🍄</span>
+  <h1>Bring Your Terrashroom<br><em>Back to Life</em></h1>
+  <p class="hero-sub">
+    The Terrashroom cloud server is gone — but your unit still works.
+    This free guide restores full local control without opening the device,
+    flashing firmware, or buying special hardware.
+  </p>
+  <div class="hero-badges">
+    <span class="badge good">✓ No disassembly</span>
+    <span class="badge good">✓ No risk of bricking</span>
+    <span class="badge good">✓ Original firmware intact</span>
+    <span class="badge">~30 min setup</span>
+    <span class="badge">100% free</span>
+  </div>
+  <div class="cta-row">
+    <a href="#download" class="btn btn-teal">↓ Get the Files</a>
+    <a href="#how-it-works" class="btn btn-outline">How it works</a>
+  </div>
+</div>
+
+<main>
+
+  <!-- WHY THIS GUIDE -->
+  <section>
+    <div class="section-label">Background</div>
+    <h2 class="section-title">What happened & why this works</h2>
+    <p class="section-body">
+      Terrashroom built their app on top of <strong>Blynk</strong>, an IoT platform that handles
+      the connection between the app and the device. When the company shut down, their Blynk server
+      went offline — but the device itself is perfectly fine. It still boots, still runs its grow
+      automation, and still tries to connect to a server. We just need to give it one to talk to.
+    </p>
+
+    <div class="callout">
+      <strong>The key insight:</strong> The Blynk local server is open source, free to run on any
+      PC or Raspberry Pi, and the Terrashroom device will connect to it without any modifications
+      to the hardware or firmware.
+    </div>
+
+    <h3 style="font-family:'Lora',serif; font-size:18px; color:var(--brown); margin:28px 0 12px;">
+      Why not ESPHome?
+    </h3>
+    <p class="section-body" style="margin-bottom:16px;">
+      Some owners have reflashed their units with ESPHome. It works, but there's a better way:
+    </p>
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>Requirement</th>
+          <th>ESPHome Route</th>
+          <th>This Guide</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Disassembly required</td><td class="bad">Yes — open the unit</td><td class="good">No</td></tr>
+        <tr><td>Risk of bricking</td><td class="bad">Yes — if flash fails</td><td class="good">None</td></tr>
+        <tr><td>Special hardware</td><td class="bad">USB-serial adapter</td><td class="good">None</td></tr>
+        <tr><td>Original firmware</td><td class="bad">Replaced entirely</td><td class="good">Kept intact</td></tr>
+        <tr><td>Built-in automation logic</td><td class="bad">Must rebuild from scratch</td><td class="good">Fully preserved</td></tr>
+        <tr><td>Setup time</td><td class="bad">Several hours</td><td class="good">~30 minutes</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <hr class="divider">
+
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works">
+    <div class="section-label">Overview</div>
+    <h2 class="section-title">How it works</h2>
+    <p class="section-body">Three parts that work together:</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>DNS Spoofing</h3>
+          <p>Tell your network to redirect <code>console.terrashroom.io</code> to your own PC or phone instead of the real (now-dead) server. The device never knows the difference.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Local Blynk Server</h3>
+          <p>Run an open-source Blynk server locally. It accepts the device's connection and logs the auth token — a 32-character string that identifies your specific unit.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Controller App</h3>
+          <p>A single HTML file that runs in any browser. Enter your auth token and local server IP — full control restored. Fans, misting, dome, lights, heater, setpoints, everything.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SERVER HARDWARE -->
+  <section>
+    <div class="section-label">Requirements</div>
+    <h2 class="section-title">What runs the server?</h2>
+    <p class="section-body">
+      Since Terrashroom's server is gone, you need something running 24/7 on your local network.
+      You have several options — including a spare Android phone you might already own.
+    </p>
+
+    <div class="hw-grid">
+      <div class="hw-card featured">
+        <div class="rec-tag">RECOMMENDED</div>
+        <div class="hw-card-icon">📱</div>
+        <div class="hw-card-name">Spare Android Phone</div>
+        <div class="hw-card-cost">$0</div>
+        <div class="hw-card-note">Use Termux to run the server. Keep it plugged in, disable battery optimization. iPhone won't work.</div>
+      </div>
+      <div class="hw-card featured">
+        <div class="rec-tag">BEST LONG-TERM</div>
+        <div class="hw-card-icon">🥧</div>
+        <div class="hw-card-name">Raspberry Pi Zero 2 W</div>
+        <div class="hw-card-cost">~$15</div>
+        <div class="hw-card-note">Tiny, low-power, rock solid. Runs the server and DNS spoofing together. Set it and forget it.</div>
+      </div>
+      <div class="hw-card">
+        <div class="hw-card-icon">🥧</div>
+        <div class="hw-card-name">Raspberry Pi 3 / 4</div>
+        <div class="hw-card-cost">~$35–55</div>
+        <div class="hw-card-note">More powerful than needed but works great. Can handle multiple Terrashroom units.</div>
+      </div>
+      <div class="hw-card">
+        <div class="hw-card-icon">💻</div>
+        <div class="hw-card-name">Always-on PC or Mac</div>
+        <div class="hw-card-cost">$0</div>
+        <div class="hw-card-note">Works fine if your machine runs 24/7 anyway. Easiest starting point.</div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:20px;">
+      <strong>Android phone tip:</strong> Install Termux from F-Droid (not the Play Store — that version is outdated),
+      then <code>pkg install openjdk-17</code> and run the server JAR directly. Add Termux:Boot from F-Droid
+      to auto-start the server after reboots. Takes about 15 minutes total.
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- FAQ -->
+  <section>
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title">Common questions</h2>
+
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Does this work with eero routers?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          eero doesn't support custom local DNS entries. You'll need to handle DNS spoofing separately —
+          either via Pi-hole or dnsmasq on a Raspberry Pi, or by creating a PC hotspot and editing your
+          hosts file. The full guide covers all three options in detail.
+        </div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Will my grow schedules and automation still work?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Yes — the device's original firmware handles all the automation logic locally.
+          The server just relays commands and sensor readings. Your setpoints, misting schedules,
+          and temperature control all continue to function exactly as they did before.
+        </div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What's an auth token and where do I find mine?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          The auth token is a 32-character string that identifies your specific Terrashroom unit.
+          It's stored in the device firmware. You capture it by running a local Blynk server,
+          booting the device (which automatically connects to your local server via DNS spoofing),
+          and reading the token from the server's log file. The full guide walks through this step by step.
+          You can also use Wireshark to capture it from network traffic.
+        </div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Can I use my iPhone as a server?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Unfortunately no — iOS doesn't allow persistent background processes of this kind.
+          Android works well via Termux. Any Raspberry Pi also works great and uses very little power.
+        </div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Does my Terrashroom need to be connected to the internet?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          No — once the local server is running, everything stays on your local WiFi network.
+          The device talks to your PC or Pi, not the internet. You don't need an internet connection
+          for any of it after initial setup.
+        </div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What if the device connects on HTTPS/port 443?
+          <span class="faq-arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          The local Blynk server still logs the token even for encrypted connections — check
+          <code>data/logs/blynk.log</code> after the device connects. You can also add
+          <code>http.port=80</code> to <code>server.properties</code> to offer a plain HTTP fallback
+          that some devices will use. The guide covers this troubleshooting step.
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- DOWNLOAD -->
+  <section id="download">
+    <div class="download-box">
+      <h2>Get the Files</h2>
+      <p>
+        Two files — the step-by-step PDF guide and the browser-based controller app.
+        Save both. The controller app works offline once downloaded.
+      </p>
+      <div class="download-files">
+        <div class="dl-card" onclick="downloadGuide()">
+          <div class="dl-card-type">📄 PDF Guide</div>
+          <div class="dl-card-name">Revival Guide</div>
+          <div class="dl-card-desc">Complete step-by-step instructions.<br>Print it or keep it on your phone.</div>
+        </div>
+        <div class="dl-card" onclick="downloadApp()">
+          <div class="dl-card-type">🌐 Web App</div>
+          <div class="dl-card-name">Controller App</div>
+          <div class="dl-card-desc">Open in any browser on your network.<br>No installation required.</div>
+        </div>
+      </div>
+      <p style="margin-top:20px; font-size:12px; color:rgba(245,241,235,0.35);">
+        Community-built. No accounts, no tracking, no ads. Just open source goodwill.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>🍄 Terrashroom Revival Project — Community Edition</p>
+  <p style="margin-top:6px;">
+    Built by the mushroom growing community, for the mushroom growing community.<br>
+    Share freely in r/MushroomGrowers, r/unclebens, and anywhere Terrashroom owners gather.
+  </p>
+</footer>
+
+<script>
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+function downloadGuide() {
+  const a = document.createElement('a');
+  a.href = 'https://colbydenn.github.io/terrashroom-apk/terrashroom_revival_guide.pdf';
+  a.download = 'terrashroom_revival_guide.pdf';
+  a.target = '_blank';
+  a.click();
+}
+
+function downloadApp() {
+  const a = document.createElement('a');
+  a.href = 'https://colbydenn.github.io/terrashroom-apk/terrashroom-v2.html';
+  a.download = 'terrashroom-controller.html';
+  a.target = '_blank';
+  a.click();
+}
+</script>
+
+</body>
+</html>
