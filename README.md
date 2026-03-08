@@ -1,2 +1,1 @@
-# terrashroom-apk
-Claude terrashroom replacement app
+100% Free Terrashroom Revival
